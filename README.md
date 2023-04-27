@@ -1,8 +1,16 @@
 #  MRkit
 
+![license](https://img.shields.io/badge/license-Apache%202.0-blue)  ![platform](https://img.shields.io/badge/platform-linux-lightgrey) ![release](https://img.shields.io/badge/release-v0.0.1-blue) 
+
 ##  Introduction
 
 **MRkit** is used to perform Mendelian randomization (MR) analysis to reveal the relationship between gene expression levels and phenotype. Details about the calculation can be found [here](#Reference). In brief, it calculates a 2-step least squares (2SLS)  estimate of $x$ on $y$ ,  $\hat{b_{xy}}$ , which equals to $\hat{b_{zy}}/\hat{b_{zx}}$ , and its corresponding test statistic $\rm{T_{MR}}=\chi_{1}^{2}=\hat{b_{xy}}/\rm{var}(\hat{b_{xy}})$ , to test the significance of $b_{xy}$ in revealing the association between the expression level of a gene and the phenotype. Here, $x$ is the gene expression level, $y$ is the phenotype, $z$ is the SNP most significantly associated with the gene detected by eQTL analysis and as an instrumental variable in the MR analysis.  $\hat{b_{zy}}$ and $\hat{b_{zx}}$ are the least-squares estimates of $y$ and $x$ on $z$, respectively, and $b_{xy}$ is interpreted as effect size of $x$ on $y$ free of confounding from non-genetic factors.
+
+##  Download
+
+```
+git clone https://github.com/bingochenbin/MRkit.git
+```
 
 ##  Requirements
 
@@ -56,12 +64,12 @@ Finally, the above `SNPgenp_MR.txt`  contains the input SNP genotyping data for 
 
 ```
 CHROM	POS	ID	REF	ALT	WMG001A	WMG002A	WMG003A	WMG004A	WMG005A	WMG006A	WMG007A	WMG008A	WMG009A	WMG010A	WMG011A	WMG012A	WMG013A	WMG014A	WMG015A	WMG016A	WMG017A	WMG018A	WMG019A	WMG020A	WMG021A	WMG022A	WMG023A	WMG024A	WMG025A	WMG026A	WMG027A	WMG028A	WMG029A	WMG030A	WMG031A	WMG032A	WMG033A	WMG034A	WMG035A	WMG036A	WMG037A	WMG038A	WMG039A	WMG040A	WMG041A	WMG042A	WMG043A	WMG044A	WMG045A	WMG046A	WMG047A	WMG048A	WMG049A	WMG050A	WMG051A	WMG052A	WMG053A	WMG054A	WMG055A	WMG056A	WMG057A	WMG058A	WMG059A	WMG060A	WMG061A	WMG062A	WMG063A	WMG064A	WMG065A	WMG066A	WMG067A	WMG068A	WMG069A	WMG070A	WMG071A	WMG072A	WMG073A	WMG074A	WMG075A	WMG076A	WMG077A	WMG078A	WMG079A	WMG080A	WMG081A	WMG082A	WMG083A	WMG084A	WMG085A	WMG086A	WMG087A	WMG088A	WMG089A	WMG090A	WMG091A	WMG092A	WMG093A	WMG094A	WMG095A	WMG096A	WMG097A	WMG098A	WMG099A	WMG100A	WMG101A	WMG102A	WMG103A	WMG104A	WMG105A	WMG106A	WMG107A	WMG108A	WMG109A	WMG110A	WMG111A	WMG112A	WMG113A	WMG114A	WMG115A	WMG116A	WMG117A	WMG118A	WMG119A	WMG120A	WMG121A	WMG122A	WMG123A	WMG124A	WMG125A
-chr1A	44293	chr1A_44293		G	C	0	0	0	0	0	1	0	0	NA	0	0	0	0	0	0	0	0	NA	0	NA	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	NA	0	0	0	0	0	0	1	0	0
-chr1A	47377	chr1A_47377		C	T	2	0	0	0	0	0	0	0	NA	0	0	1	0	0	0	0	0	NA	0	0	2	0	0	2	0	0	0	0	0	0	0	0	0	0	0	NA	0	0	0	0	NA	0	0	0	0	2	0	0	0	0	0	0	0	NA	0	0	0	0	NA	0	0	0	0	0
-chr1A	59771	chr1A_59771		G	A	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	NA	1	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	NA	1	0	1	0	0	NA	0	0	NA	NA	0	0	0	0	0	1	0	NA	0	0	0	0	NA	0	0	0	0	0	0	1	0	0	0	NA	0	0	0	0	0	0	0	0	0
-chr1A	59775	chr1A_59775		C	T	0	1	0	0	1	0	0	0	NA	0	0	0	0	0	0	0	0	NA	1	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	NA	1	0	1	0	0	NA	0	0	NA	NA	0	0	0	0	0	1	0	NA	0	0	0	0	NA	0	0	0	0	0	0	1	0	0	0	NA	0	0	0	0	0	0	0	0	0
-chr1A	91617	chr1A_91617		G	A	0	0	0	0	2	0	2	0	NA	0	2	0	0	2	2	0	0	NA	0	0	2	0	0	0	0	2	2	NA	0	0	0	0	0	0	0	0	2	0	0	0	NA	0	0	2	2	NA	2	0	0	2	0	0	2	0	0
-chr1A	94403	chr1A_94403		C	T	0	0	0	0	0	0	0	0	NA	0	0	0	2	0	0	0	2	NA	0	0	0	0	0	0	0	0	0	NA	0	0	0	0	0	0	2	0	0	2	2	2	NA	2	0	0	0	2	2	0	0	0
+chr1A	44293	chr1A_44293	G	C	0	0	0	0	0	1	0	0	NA	0	0	0	0	0	0	0	0	NA	0	NA	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	NA	0	0	0	0	0	0	1	0	0
+chr1A	47377	chr1A_47377	C	T	2	0	0	0	0	0	0	0	NA	0	0	1	0	0	0	0	0	NA	0	0	2	0	0	2	0	0	0	0	0	0	0	0	0	0	0	NA	0	0	0	0	NA	0	0	0	0	2	0	0	0	0	0	0	0	NA	0	0	0	0	NA	0	0	0	0	0
+chr1A	59771	chr1A_59771	G	A	0	1	0	0	1	0	0	0	0	0	0	0	0	0	0	0	0	NA	1	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	NA	1	0	1	0	0	NA	0	0	NA	NA	0	0	0	0	0	1	0	NA	0	0	0	0	NA	0	0	0	0	0	0	1	0	0	0	NA	0	0	0	0	0	0	0	0	0
+chr1A	59775	chr1A_59775	C	T	0	1	0	0	1	0	0	0	NA	0	0	0	0	0	0	0	0	NA	1	0	0	0	2	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1	NA	1	0	1	0	0	NA	0	0	NA	NA	0	0	0	0	0	1	0	NA	0	0	0	0	NA	0	0	0	0	0	0	1	0	0	0	NA	0	0	0	0	0	0	0	0	0
+chr1A	91617	chr1A_91617	G	A	0	0	0	0	2	0	2	0	NA	0	2	0	0	2	2	0	0	NA	0	0	2	0	0	0	0	2	2	NA	0	0	0	0	0	0	0	0	2	0	0	0	NA	0	0	2	2	NA	2	0	0	2	0	0	2	0	0
+chr1A	94403	chr1A_94403	C	T	0	0	0	0	0	0	0	0	NA	0	0	0	2	0	0	0	2	NA	0	0	0	0	0	0	0	0	0	NA	0	0	0	0	0	0	2	0	0	2	2	2	NA	2	0	0	0	2	2	0	0	0
 chr1A	107209	chr1A_107209	C	T	0	0	0	0	0	0	0	0	0	0	0	0	2	0	0	0	2	NA	0	1	0	0	2	2	2	2	2	1	0	2	0	2	0	0	0	2	1	0	0	1	NA	0	2	2	0	0	0	0	0	0	0	2	2	2	0	1	0	0	0	0	2	2	0	NA	0	0	2	2	0	2	0	2	0	2	1	2	0	2	1	0	0	NA	0	0	0	0	0
 chr1A	133475	chr1A_133475	C	T	0	0	0	0	0	0	0	0	NA	0	0	0	0	0	0	0	0	NA	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	NA	0	0	0	0	NA	0	0	0	0	0	0	0	0	0
 chr1A	146430	chr1A_146430	C	A	0	0	0	0	2	0	2	0	NA	0	2	0	0	2	2	NA	0	NA	0	0	0	0	0	0	0	0	2	0	0	0	0	0	0	2	0	0	0	0	0	0	NA	0	0	2	2	NA	2	0	0	2	0	0	2	0	0
