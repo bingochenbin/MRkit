@@ -85,7 +85,7 @@ prefix_checker <- function(prefix, allowed_chars = "[A-Za-z0-9_\\.]") {
 }
 outprefix = prefix_checker(opt$outprefix)
 
-# ## check if the files exist
+## check if the files exist
 if (file.access(opt$geno_input) == -1){
   stop("The file (", opt$geno_input, ") doesn't exist! Please check!\n")
 }else{
@@ -111,7 +111,7 @@ if (file.access(opt$eqtl_input) == -1){
 }
 
 if (opt$cpu <= 0){
-  stop("The number of cpu provided is incorrect! Please check!\n")
+  stop("The number of cpu cores provided is incorrect! Please check!\n")
 }else{
   nchunk = opt$cpu
 }

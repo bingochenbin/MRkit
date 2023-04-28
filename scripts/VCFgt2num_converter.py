@@ -44,7 +44,7 @@ def pyversion_checker() -> None:
     if sys.hexversion < 0x30800f0:
         sys.exit('Error: The Python version being used is too low. You need to update the Python to v3.8.0 or newer.')
     else:
-        print('Info: The Python version being used is satisfactory.')
+        print('Info: The Python version being used is satisfactory.', flush=True)
 
 
 def outdir_checker(outdir) -> str:
