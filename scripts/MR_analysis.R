@@ -1,6 +1,5 @@
 ############################################################
-# Copyright 2023-2033 Bin Chen
-#  @author:chenbin
+#  @author:Bin Chen
 #  @created time:2023/4/24
 #  @email: chenbin_6901@163.com/a1030539294@gmail.com
 #  @comment: Perform the MR analysis to reveal the relationship between gene expression levels and the phenotype

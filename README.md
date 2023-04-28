@@ -40,7 +40,7 @@ optparse
 
 ###  1. The SNP genotyping data
 
-To prepare the SNP genotyping data for input, you need to first extract the GT information (genotype encoded as allele values separated by either / or |) from your VCF file:
+To prepare the SNP genotyping data for input, you need to first extract the GT information (genotype, encoded as allele values separated by either / or |) from your VCF file:
 
 ```bash
 # Extract the GT from your VCF file using bcftools software

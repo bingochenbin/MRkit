@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 ############################################################
-# Copyright 2023-2033 Bin Chen
-#  @author:chenbin
+#  @author:Bin Chen
 #  @created time:2023/02/26
 #  @email: chenbin_6901@163.com/a1030539294@gmail.com
 #  @comment: Script to convert genotypes in VCF to numeric codes.
