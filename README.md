@@ -40,6 +40,8 @@ optparse
 
 ###  1. The SNP genotyping data
 
+> **Caution:** The SNP genotyping data should only contain biallelic SNPs.
+
 To prepare the SNP genotyping data for input, you need to first extract the GT information (genotype, encoded as allele values separated by either / or |) from your VCF file:
 
 ```bash
