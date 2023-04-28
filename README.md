@@ -134,7 +134,7 @@ WMG009A	6.67
 After you have already prepared the input datasets as requested, you can use the script `MR_analysis.R` to perform MR analysis. If this is your first time using the script, type its name followed by `-h` to display help information.
 
 ```
-cmd> Rscript4 MR_analysis.R -h
+cmd> Rscript MR_analysis.R -h
 Loading required package: parallel
 Usage: MR_analysis.R [-h] -G FILENAME -E FILENAME -P FILENAME -Q FILENAME -d DIRECTORY -p outprefix [-n INT]
 
