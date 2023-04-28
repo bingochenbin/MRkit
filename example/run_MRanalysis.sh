@@ -15,10 +15,10 @@ bcftools query -H -f '%CHROM\t%POS\t%ID\t%REF\t%ALT[\t%TGT]\n' $vcf_input \
 plink --vcf $vcf_input --make-bed -out SNPgeno --allow-extra-chr
 
 ###
-python3 /home/chenb/Software/src/script/python3/pycharm/EQTL-KIT/eQTLkit/scripts/VCFgt2num_converter.py\
+python3 ../scripts/VCFgt2num_converter.py\
  -o SNPgeno_MR.txt\
  -v SNPgeno.GT.vcf.gz\
  -b SNPgeno.bim
 
 ###
-Rscript ../MR_analysis.R -G SNPgeno_MR.txt -E MR_expr.txt -P MR_pheno.txt -Q MR_eQTLs.txt -d ./ -p MR_result_test
+Rscript ../scripts/MR_analysis.R -G SNPgeno_MR.txt -E MR_expr.txt -P MR_pheno.txt -Q MR_eQTLs.txt -d ./ -p MR_result_test
