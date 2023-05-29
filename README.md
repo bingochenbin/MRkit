@@ -95,6 +95,21 @@ TraesCS1A02G002300	chr1A:699531-800903	chr1A_799864	4.331337e-18
 TraesCS1A02G002300	chr1A:1144542-1347913	chr1A_1170182	3.972977e-17
 ```
 
+By considering the SNP with the strongest association signal within an interval as an eQTL, the eQTLs data can be similar to the following:
+
+```
+GeneID	eQTL	SNP	Pvalue
+TraesCS1A02G000900	chr1A_1176830	chr1A_1176830	1.1521e-09
+TraesCS1A02G000900	chr1A_1346169	chr1A_1346169	3.058955e-09
+TraesCS1A02G000900	chr1A_2849335	chr1A_2849335	1.335856e-07
+TraesCS1A02G000900	chr1A_3262110	chr1A_3262110	1.891741e-09
+TraesCS1A02G000900	chr1A_3388319	chr1A_3388319	4.752083e-10
+TraesCS1A02G000900	chr1A_3761363	chr1A_3761363	2.08425e-08
+TraesCS1A02G002300	chr1A_522091	chr1A_522091	6.325763e-18
+TraesCS1A02G002300	chr1A_799864	chr1A_799864	4.331337e-18
+TraesCS1A02G002300	chr1A_1170182	chr1A_1170182	3.972977e-17
+```
+
 ###  3. The gene expression levels data
 
 The gene expression levels data consists of rows and columns representing samples and genes, respectively. Each row corresponds to a sample, and each column corresponds to a gene. The first column contains sample IDs, and the remaining columns contain expression levels for each gene. The values in each cell indicate the expression level of the corresponding gene for the respective sample. Here is an example of the gene expression levels data:
