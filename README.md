@@ -6,6 +6,10 @@
 
 **MRkit** is used to perform Mendelian randomization (MR) analysis to reveal the relationship between gene expression levels and phenotype. Details about the calculation can be found [here](#Reference). In brief, it calculates a 2-step least squares (2SLS)  estimate of $x$ on $y$ ,  $\hat{b_{xy}}$ , which equals to $\hat{b_{zy}}/\hat{b_{zx}}$ , and its corresponding test statistic $\rm{T_{MR}}=\chi_{1}^{2}=\hat{b_{xy}}/\rm{var}(\hat{b_{xy}})$ , to test the significance of $b_{xy}$ in revealing the association between the expression level of a gene and the phenotype. Here, $x$ is the gene expression level, $y$ is the phenotype, $z$ is the SNP most significantly associated with the gene detected by eQTL analysis and as an instrumental variable in the MR analysis.  $\hat{b_{zy}}$ and $\hat{b_{zx}}$ are the least-squares estimates of $y$ and $x$ on $z$, respectively, and $b_{xy}$ is interpreted as effect size of $x$ on $y$ free of confounding from non-genetic factors.
 
+<img src="README.assets/image-20231222105406848.png" alt="Zhu, Zhihong, et al. &quot;Integration of summary data from GWAS and eQTL studies predicts complex trait gene targets.&quot; *Nature genetics* 48.5 (2016): 481-487." />
+
+
+
 ##  Download
 
 ```

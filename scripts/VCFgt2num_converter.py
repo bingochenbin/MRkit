@@ -180,7 +180,7 @@ def vcfconverter(vcfblock) -> List:
         chrom, pos, snpid, _ = item.split('\t', 3)
         firstmap, secondmap, thirdmap, lastmap, pfirstmap, psecondmap, pthirdmap, plastmap = converter_dict[snpid].items()
         txt = item.replace(*firstmap).replace(*secondmap).replace(*thirdmap).replace(*lastmap).\
-            replace(*pfirstmap).replace(*psecondmap).replace(*pthirdmap).replace(*plastmap).replace('./.', 'NA')
+            replace(*pfirstmap).replace(*psecondmap).replace(*pthirdmap).replace(*plastmap).replace('./.', 'NA').replace('.|.', 'NA')
         txt_chunk_append(txt)
 
     return txt_chunk

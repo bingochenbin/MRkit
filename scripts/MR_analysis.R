@@ -85,7 +85,7 @@ prefix_checker <- function(prefix, allowed_chars = "[A-Za-z0-9_\\.]") {
 }
 outprefix = prefix_checker(opt$outprefix)
 
-## check if the files exist
+# ## check if the files exist
 if (file.access(opt$geno_input) == -1){
   stop("The file (", opt$geno_input, ") doesn't exist! Please check!\n")
 }else{
@@ -111,7 +111,7 @@ if (file.access(opt$eqtl_input) == -1){
 }
 
 if (opt$cpu <= 0){
-  stop("The number of cpu cores provided is incorrect! Please check!\n")
+  stop("The number of cpu provided is incorrect! Please check!\n")
 }else{
   nchunk = opt$cpu
 }
@@ -141,8 +141,17 @@ nextElem.plist_splitor <- function(obj) obj$nextElem()
 
 ptime <- system.time({
 ##### Read in the data
+## Read in the eQTLs data
+eqtldat <- fread(file = eqtl_input, header = T, sep = "\t")
+names(eqtldat) <- c("GeneID", "eQTL", "SNP", "Pvalue")
+## Get the top eQTLs most significantly associated with the expression levels of each gene
+topeqtldat <- eqtldat[, .SD[which.min(Pvalue)], keyby = GeneID]
+# topeqtldat
+topeqtldat_uniq_snpid <- unique(topeqtldat[, SNP])
+topeqtldat_uniq_geneid <- topeqtldat[, GeneID]
+
 ## Read in the SNP genotyping data
-genodat <- fread(file = geno_input, header = T, sep = "\t", drop = c(4,5))
+genodat <- fread(file = geno_input, header = T, sep = "\t", drop = c(4,5))[which(ID %in% topeqtldat_uniq_snpid)]
 if (nrow(genodat[, .N, by = ID][N > 1]) > 0) {
   stop('Duplicate SNP ID was found in the SNP genotyping data! Please check!\n')
 }
@@ -161,13 +170,11 @@ cat('The number of samples detected: ', nsample, '\n')
 all_snpids <- names(genodat)[-1]
 # genodat[1:10, 1:10]
 
-## Read in the eQTLs data
-eqtldat <- fread(file = eqtl_input, header = T, sep = "\t")
-names(eqtldat) <- c("GeneID", "eQTL", "SNP", "Pvalue")
-
 ## Read in the gene expression data
+topeqtldat_uniq_geneid_sampleid <- c("SampleID", topeqtldat_uniq_geneid)
 exprdat <- fread(file = expr_input, header = T, sep = "\t")
 names(exprdat)[1] <- "SampleID"
+exprdat <- exprdat[, ..topeqtldat_uniq_geneid_sampleid]
 all_geneids <- names(exprdat)[-1]
 
 ## Read in the phenotype data
@@ -183,10 +190,6 @@ if (!identical(genodat[, SampleID], exprdat[, SampleID], attrib.as.set = FALSE) 
 }
 
 ##### 
-## Get the top eQTLs most significantly associated with the expression levels of each gene
-topeqtldat <- eqtldat[, .SD[which.min(Pvalue)], keyby = GeneID]
-# topeqtldat
-
 ## check 
 if (nchunk > topeqtldat[, .N]){
   cat('>>> Warning: The number of CPU cores provided is greater than the number of eQTLs',
@@ -309,7 +312,7 @@ MRres_out <- merge.data.table(
   all = F,
   sort = F
 )
-write.table(MRres_out[, .(GeneID, TopSNP, CHROM, POS, Effect, TMR, Pvalue)],
+write.table(MRres_out[order(GeneID, Pvalue), .(GeneID, TopSNP, CHROM, POS, Effect, TMR, Pvalue)],
             file = file.path(outdir, paste0(outprefix, ".MR.txt")),
             quote = F, sep = '\t', row.names = F, col.names = T)
 
