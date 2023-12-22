@@ -1,6 +1,6 @@
 #  MRkit
 
-![license](https://img.shields.io/badge/license-Apache%202.0-blue)  ![platform](https://img.shields.io/badge/platform-linux-lightgrey) ![release](https://img.shields.io/badge/release-v0.0.1-blue) 
+![license](https://img.shields.io/badge/license-Apache%202.0-blue)  ![platform](https://img.shields.io/badge/platform-linux-lightgrey) ![release](https://img.shields.io/badge/release-v0.0.2-blue) 
 
 ##  Introduction
 

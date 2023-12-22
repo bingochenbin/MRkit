@@ -85,7 +85,7 @@ prefix_checker <- function(prefix, allowed_chars = "[A-Za-z0-9_\\.]") {
 }
 outprefix = prefix_checker(opt$outprefix)
 
-# ## check if the files exist
+## check if the files exist
 if (file.access(opt$geno_input) == -1){
   stop("The file (", opt$geno_input, ") doesn't exist! Please check!\n")
 }else{
