@@ -312,7 +312,8 @@ MRres_out <- merge.data.table(
   all = F,
   sort = F
 )
-write.table(MRres_out[order(GeneID, Pvalue), .(GeneID, TopSNP, CHROM, POS, Effect, TMR, Pvalue)],
+MRres_out[, FDR := p.adjust(Pvalue, method = "BH")]
+write.table(MRres_out[order(GeneID, Pvalue), .(GeneID, TopSNP, CHROM, POS, Effect, TMR, Pvalue, FDR)],
             file = file.path(outdir, paste0(outprefix, ".MR.txt")),
             quote = F, sep = '\t', row.names = F, col.names = T)
 

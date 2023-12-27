@@ -4,7 +4,7 @@
 
 ##  Introduction
 
-**MRkit** is used to perform Mendelian randomization (MR) analysis to reveal the relationship between gene expression levels and phenotype. Details about the calculation can be found [here](#Reference). In brief, it calculates a 2-step least squares (2SLS)  estimate of $x$ on $y$ ,  $\hat{b_{xy}}$ , which equals to $\hat{b_{zy}}/\hat{b_{zx}}$ , and its corresponding test statistic $\rm{T_{MR}}=\chi_{1}^{2}=\hat{b_{xy}}/\rm{var}(\hat{b_{xy}})$ , to test the significance of $b_{xy}$ in revealing the association between the expression level of a gene and the phenotype. Here, $x$ is the gene expression level, $y$ is the phenotype, $z$ is the SNP most significantly associated with the gene detected by eQTL analysis and as an instrumental variable in the MR analysis.  $\hat{b_{zy}}$ and $\hat{b_{zx}}$ are the least-squares estimates of $y$ and $x$ on $z$, respectively, and $b_{xy}$ is interpreted as effect size of $x$ on $y$ free of confounding from non-genetic factors.
+Mendelian randomization (MR) analysis uses a genetic variant as an instrumental variable to estimate and test for the causative effect of an exposure variable on an outcome [(Ference, et al. 2012)](#Reference). **MRkit** is used to perform MR analysis to reveal the relationship between gene expression levels (exposure)  and phenotype (outcome). Details about the calculation can be found [here](#Reference).  In brief, it involves calculating a 2-step least squares (2SLS) estimate of the effect of $x$ on $y$, denoted as $\hat{b}_{xy}$,  which equals to $\hat{b_{zy}}/\hat{b_{zx}}$. The corresponding test statistic, denoted as ${T_{MR}}=\chi_{1}^{2}=\hat{b_{xy}}/{var}(\hat{b_{xy}})$, is used to assess the significance of $b_{xy}$ in revealing the association between gene expression level and phenotype. Here, $x$ represents the normalized gene expression level, $y$ represents the trait of interest, and $z$ represents the most significantly associated SNP detected by eQTL analysis. $\hat{b_{zy}}$ and $\hat{b_{zx}}$ are the least-squares estimates of $y$ and $x$ on $z$, respectively, while $b_{xy}$ is interpreted as effect size of $x$ on $y$ free of confounding from non-genetic factors.
 
 <img src="README.assets/image-20231222105406848.png" alt="Zhu, Zhihong, et al. &quot;Integration of summary data from GWAS and eQTL studies predicts complex trait gene targets.&quot; *Nature genetics* 48.5 (2016): 481-487." />
 
@@ -195,13 +195,13 @@ Rscript /path/to/MRkit/scripts/MR_analysis.R -G SNPgeno_MR.txt -E MR_expr.txt -P
 
 ##  Output
 
-After performing MR analysis, the main output file will be outprefix.MR.txt. This file contains seven columns: column 1 is the Gene ID, columns 2-4 are the SNP and its physical position on the genome, which is significantly associated with the Gene, column 5 is the estimated effect size of the gene expression level on the phenotype free of confounding from non-genetic factors, column 6 is the value of the test statistic $\rm T_{MR}$, and column 7 is the significance of  $b_{xy}$, which is used to evaluate the MR analysis result. Here is an example of the output that you can obtain by running the following example:
+After performing MR analysis, the main output file will be outprefix.MR.txt. This file contains seven columns: column 1 is the Gene ID, columns 2-4 are the SNP and its physical position on the genome, which is significantly associated with the Gene, column 5 is the estimated effect size of the gene expression level on the phenotype free of confounding from non-genetic factors, column 6 is the value of the test statistic $\rm T_{MR}$, and column 7-8 is the significance of  $b_{xy}$ (*P*-value and its corresponding adjusted *P*-value using Benjamini & Hochberg method), which is used to evaluate the MR analysis result. Here is an example of the output that you can obtain by running the following example:
 
 ```
-GeneID	TopSNP	CHROM	POS	Effect	TMR	Pvalue
-TraesCS1A02G000900	chr1A_3388319	chr1A	3388319	4.13926110466306	0.931073513546659	0.334584128542825
-TraesCS1A02G002300	chr1A_799864	chr1A	799864	-4.91637110673723	4.19837301887306	0.0404627826004724
-TraesCS1A02G005500	chr1A_3116428	chr1A	3116428	-7.13784650537219	0.574713503382365	0.448391951424399
+GeneID	TopSNP	CHROM	POS	Effect	TMR	Pvalue	FDR
+TraesCS1A02G000900	chr1A_3388319	chr1A	3388319	4.13926110466306	0.931073513546659	0.334584128542825	0.448391951424399
+TraesCS1A02G002300	chr1A_799864	chr1A	799864	-4.91637110673723	4.19837301887306	0.0404627826004724	0.121388347801417
+TraesCS1A02G005500	chr1A_3116428	chr1A	3116428	-7.13784650537219	0.574713503382365	0.448391951424399	0.448391951424399
 ```
 
 ##  Example
