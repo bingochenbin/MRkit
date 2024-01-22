@@ -4,7 +4,7 @@
 
 ##  Introduction
 
-Mendelian randomization (MR) analysis uses a genetic variant as an instrumental variable to estimate and test for the causative effect of an exposure variable on an outcome [(Ference, et al. 2012)](#Reference). **MRkit** is used to perform MR analysis to reveal the relationship between gene expression levels (exposure)  and phenotype (outcome). Details about the calculation can be found [here](#Reference).  In brief, it involves calculating a 2-step least squares (2SLS) estimate of the effect of $x$ on $y$, denoted as $\hat{b}_{xy}$,  which equals to $\hat{b_{zy}}/\hat{b_{zx}}$. The corresponding test statistic, denoted as ${T_{MR}}=\chi_{1}^{2}=\hat{b_{xy}}/{var}(\hat{b_{xy}})$, is used to assess the significance of $b_{xy}$ in revealing the association between gene expression level and phenotype. Here, $x$ represents the normalized gene expression level, $y$ represents the trait of interest, and $z$ represents the most significantly associated SNP detected by eQTL analysis. $\hat{b_{zy}}$ and $\hat{b_{zx}}$ are the least-squares estimates of $y$ and $x$ on $z$, respectively, while $b_{xy}$ is interpreted as effect size of $x$ on $y$ free of confounding from non-genetic factors.
+Mendelian randomization (MR) analysis uses a genetic variant as an instrumental variable to estimate and test for the causative effect of an exposure variable on an outcome [(Ference, et al. 2012)](#Reference). **MRkit** is used to perform MR analysis to reveal the relationship between gene expression level (exposure)  and quantitative phenotype (outcome). Details about the calculation can be found [here](#Reference).  In brief, it involves calculating a 2-step least squares (2SLS) estimate of the effect of $x$ on $y$, denoted as $\hat{b}_{xy}$,  which equals to $\hat{b_{zy}}/\hat{b_{zx}}$ and is the causal estimate meaning the change in outcome due to the unit change in exposure ([Pierce, B. L., et al. 2011](#Reference)). The corresponding test statistic, denoted as ${T_{MR}}=\chi_{1}^{2}=\hat{b_{xy}}/{var}(\hat{b_{xy}})$, is used to assess the significance of $b_{xy}$ in revealing the association between gene expression level and phenotype. Here, $x$ represents the normalized gene expression level, $y$ represents the trait of interest, and $z$ represents the most significantly associated SNP detected by eQTL analysis. $\hat{b_{zy}}$ and $\hat{b_{zx}}$ are the least-squares estimates of $y$ and $x$ on $z$, respectively, while $b_{xy}$ is interpreted as effect size of $x$ on $y$ free of confounding from non-genetic factors.
 
 <img src="README.assets/image-20231222105406848.png" alt="Zhu, Zhihong, et al. &quot;Integration of summary data from GWAS and eQTL studies predicts complex trait gene targets.&quot; *Nature genetics* 48.5 (2016): 481-487." />
 
@@ -54,7 +54,7 @@ bcftools query -H -f '%CHROM\t%POS\t%ID\t%REF\t%ALT[\t%TGT]\n' /path/to/your/vcf
  | sed -r -e '1 s@:GT@@g;1 s@\[[0-9]+\]@@g;1 s@# @@' \
  | bgzip > SNPgeno.GT.vcf.gz
 # Get the *.bim file corresponding to the VCF file using plink software
-plink --vcf /path/to/your/vcf --make-bed -out SNPgeno --allow-extra-chr
+plink --vcf /path/to/your/vcf --make-just-bim -out SNPgeno --allow-extra-chr
 ```
 
 Then, you need to convert the genotypes in the `SNPgeno.GT.vcf.gz` file to numeric codes using the `VCFgt2num_converter.py` script. Specifically, the fifth column of the *.bim file indicates the minor allele, which is coded as 1, while the sixth column indicates the major allele, which is coded as 0. The numeric code corresponding to a genotype is the sum of these values.
@@ -226,7 +226,11 @@ Please don't hesitate to leave a message at github [`Issues`](https://github.com
 
 ##  Reference
 
-1. Zhu, Zhihong, et al. "Integration of summary data from GWAS and eQTL studies predicts complex trait gene targets." *Nature genetics* 48.5 (2016): 481-487.
+1. Ference, B. A., Yoo, W., Alesh, I., Mahajan, N., Mirowska, K. K., Mewada, A., Kahn, J., Afonso, L., Williams, K. A., Sr, & Flack, J. M. (2012). Effect of long-term exposure to lower low-density lipoprotein cholesterol beginning early in life on the risk of coronary heart disease: a Mendelian randomization analysis. *Journal of the American College of Cardiology*, *60*(25), 2631–2639. https://doi.org/10.1016/j.jacc.2012.09.017
 
-2. Liu, Shengxue, et al. "Mapping regulatory variants controlling gene expression in drought response and tolerance in maize." *Genome biology* 21.1 (2020): 1-22.
+2. Zhu, Z., Zhang, F., Hu, H., Bakshi, A., Robinson, M. R., Powell, J. E., Montgomery, G. W., Goddard, M. E., Wray, N. R., Visscher, P. M., & Yang, J. (2016). Integration of summary data from GWAS and eQTL studies predicts complex trait gene targets. *Nature genetics*, *48*(5), 481–487. https://doi.org/10.1038/ng.3538
+
+3. Liu, S., Li, C., Wang, H., Wang, S., Yang, S., Liu, X., Yan, J., Li, B., Beatty, M., Zastrow-Hayes, G., Song, S., & Qin, F. (2020). Mapping regulatory variants controlling gene expression in drought response and tolerance in maize. *Genome biology*, *21*(1), 163. https://doi.org/10.1186/s13059-020-02069-1
+
+4. Pierce, B. L., Ahsan, H., & Vanderweele, T. J. (2011). Power and instrument strength requirements for Mendelian randomization studies using multiple genetic variants. *International journal of epidemiology*, *40*(3), 740–752. https://doi.org/10.1093/ije/dyq151
 
